@@ -1,0 +1,125 @@
+Instructions:
+
+1) Activate your virtual environment with this command - 'conda activate django_conda_env'
+
+2) Create your project by running: 'django-admin startproject [name-of-project]'
+For my project I used: "django-admin startproject django_project"
+
+This creates the following:
+	- A folder with the name-of-project plus the following python files:
+		a) __init__.py
+		b) settings.py
+		c) urls.py
+		d) wsgi.py
+	- A manage.py file
+
+* (NB - run the without the brackets)
+
+3) cd into your project directory and run this command:
+	'python manage.py runserver'
+This command will kick off the django development run server at http://127.0.0.1:8000/
+
+4) Some Terminologies:
+
+a) A Django project is a collection of applications and configurations that when combined together will make up the full web application (i.e. the full website running with Django).
+
+b) A Django web application is created to perform a specific functionality for your entire web application. i.e. a registration app, a polling app, comments app, etc.
+These Django Apps can be plugged into other Django Projects for reuse (i.e. use other people's apps). 
+
+5) Next run this command: ' python manage.poy startapp [name-of-your-app]' to start your Django web App.
+For my project I used: "python manage.py startapp abinitio_app"
+
+This commend creates the following (Model View Template - MVC design pattern):
+	- A folder with the name-of-project("abinitio_app") plus the following python files:
+		a) __init__.py - a blank file to let Python know that this directory can be treated as a package.
+		b) admin.py - for registering your models which Django can use with Django's admin interface.
+		c) apps.py - to store application specific configurations.
+		d) models.py - to store the web app's data models (where we specify the entities and relationships between our data).
+		e) tests.py - to store test functions to test our code.
+		f) views.py - where we can store functions that handle requests and return responses.
+
+	- A migration directory/folder - this stores database specific information as it relates to the models.
+
+
+6) Then update settings.py file to let Django about the new web app we just created! 
+Add the [name-of-your-app] to 'INSTALLED_APPS' list in settings.py. In this example. I will add "abinitio app"
+
+7) Then create a view and map the view to a URL! Open the 'views.py' under your web app folder and add the following:
+		a) from django.http import HttpResponse
+		b) create a new view('index' using a function as below:
+
+def index(request):
+    	return HttpResponse("Hello Word")
+
+Each view for this web app will:
+	- exist in the 'views.py' file as its own individual function.
+	- take in at least one argument (by convention this is named 'request').
+	- return an HttpReposponse object. In this example - "Hello World". This will
+
+Map the new view into the "urls.py" by adding the following path() calls:
+
+```from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'), # this the new view created above.
+    path('admin/', admin.site.urls),]```
+
+If the relative fails to work, add the following:
+	a) import sys
+	b) syst.path.append('..')
+
+8) Create a URLconf in the "abinitio app" directory by adding a file called 'urls.py'.
+
+9) In the abinitio app/urls.py file include the following code:
+
+```
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index')]```
+
+10) Point the root URLconf at the 'abinitio_app.urls' module. In 'django_project/urls.py', add an "import from django.urls.include" and insert an "include()" in the "urlpatterns" list, so you have:
+
+```
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('abinitio_app/', include('abinitio_app.urls')),
+    path('admin/', admin.site.urls),]
+```
+
+11) Create a directory called 'templates' in 'django_project' directory. Django will look for templates in there.
+
+12) Within the templates directory we just created, create another directory called 'abinitio_app'[the name for the web app] and within that create a file called 'index.html'.
+	The template looks at "django_project/templates/abinitio_app/index.html".
+
+13) In the index.html file, add the following:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Abinitio App</title>  # must match the key used in the dictionary passed to the context parameter in the functions created in 'veiws.py'.
+</head>
+<body>
+    <h1>The body of the page goes here. This is index.html!</h1>
+    {{ insert_me }}
+</body>
+</html>
+```
+ 
+14) Modify 'views.py' file to:
+
+```
+def index(request):
+    context = {'insert_me': "Wale's web_page test!"}
+    template = loader.get_template('abinitio_app/index.html')
+    return HttpResponse(template.render(context, request))
+```
+
+You can add mutliple functions to the view, but ensure you add the urls in the app "urls.py" file.
+

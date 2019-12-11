@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}  <!-- Enables Django to load static files. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Abinitio App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+    <h1>
+        The body of the page goes here. This is index.html!
+    </h1>
+    <img src="{% static 'images/flower3.jpg' %}" alt='Oops! image not found!'>
+    <h2>{{ insert_me }}</h2>
+    <!-- Ensure that text in the double curly brackets match the key in the func defined in views.py. -->
+</body>
+</html>
