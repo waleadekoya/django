@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users_Page</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+{#    {{ users }}#}
+    <h1>Welcome to Users' Page. You will find below list of our users.</h1>
+</head>
+<body>
+<div class="users">
+    {% if users %}
+        <table>
+            <thead>
+            <th>id</th>
+            <th>First_Name</th>
+            <th>Last_Name</th>
+            <th>Email</th>
+            </thead>
+
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.pk }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        <p>User not in database. Table Not Created.</p>
+    {% endif %}
+
+</body>
+</html>

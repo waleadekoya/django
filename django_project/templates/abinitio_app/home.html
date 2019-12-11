@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+
+</head>
+<body>
+<div class='jumbotron'>
+    <h1>Welcome to my website. You're in Wale's home page.</h1>
+    {{ home_me }} <!-- Specify same key in the context dict variable in views.py. -->
+    <h1>Hi, welcome to my website!</h1>
+    <h2>Here are the programming languages:</h2>
+</div>
+    <div class="home">
+      {% if programmers %}
+          <table>
+            <thead>
+                <th>id</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Company</th>
+              <th>Languages</th>
+            </thead>
+
+            {% for programmer in programmers %}
+              <tr>
+                <td>{{ programmer.pk }}</td>
+                <td>{{ programmer.programmer_name }}</td>
+                <td>{{ programmer.age }}</td>
+                <td>{{ programmer.company }}</td>
+                <td>{{ programmer.languages.all }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+
+      {% else %}
+        <p>Programmer not in database. Table Not Created.</p>
+      {% endif %}
+    </div>
+</body>
+</html>

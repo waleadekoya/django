@@ -1,0 +1,9 @@
+setup_instructions.txt
+*.jpg
+*.jpeg
+*.png
+__pycache__
+*.pyc
+*.pdf
+django_project/PASSWORD.py
+django_project/CREDENTIALS.py
