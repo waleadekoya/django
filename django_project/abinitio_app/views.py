@@ -34,6 +34,11 @@ def help(request):
     return render(request, 'abinitio_app/help.html', context)
 
 
+def cv(request):
+    context = {'cv_template': 'My Professional CV'}
+    return render(request, 'abinitio_app/cv.html', context)
+
+
 def form_name_view(request):
     form = forms.CompanyForm()
     # Check to see if we get a POST back

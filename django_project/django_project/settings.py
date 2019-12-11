@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'moviesdb',  # os.path.join(BASE_DIR, 'db.sqlite3'),
-        'HOST': 'localhost',
+        'HOST': credentials.get('HOST'),
         'USER': credentials.get('USER'),
         'PASSWORD': credentials.get('PASSWORD'),
         'PORT': credentials.get('PORT'),
@@ -127,7 +127,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-CELERY_BROKER_URL = credentials.get('CELERY_BROKER_URL')
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'  # credentials.get('CELERY_BROKER_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 

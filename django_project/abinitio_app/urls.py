@@ -5,6 +5,7 @@ urlpatterns = [
     path(route='', view=views.home, name='home'),
     path(route='index', view=views.index, name='index'),
     path(route='help', view=views.help, name='help'),
+    path(route='my-cv', view=views.cv, name='cv'),
     path(route='formpage/', view=views.form_name_view, name='form_name')
 
 ]
