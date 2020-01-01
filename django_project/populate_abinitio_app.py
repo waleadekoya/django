@@ -1,7 +1,7 @@
 import os
 from threading import Thread
 import sys
-from logger import Logger
+from .logger import Logger
 
 sys.path.append("django")
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
@@ -11,7 +11,7 @@ django.setup()
 
 # DUMMY POPULATE SCRIPT
 import random
-from abinitio_app.models import Company, Programmer, Language
+from .abinitio_app.models import Company, Programmer, Language
 from faker import Faker
 log = Logger().log
 
