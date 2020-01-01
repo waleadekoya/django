@@ -12,7 +12,7 @@ conf = {
 settings.configure(**conf)
 django.setup()
 
-from abinitio_app.models import Company, Language, Programmer
+from django_project.abinitio_app.models import Company, Language, Programmer
 
 # from here we can interact with the database using Django ORM API
 [print(item.comp_name) for item in Company.objects.all()]
