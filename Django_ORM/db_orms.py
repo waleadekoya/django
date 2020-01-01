@@ -14,7 +14,7 @@ django.setup()
 
 from abinitio_app.models import Company, Language, Programmer
 
-# from here we can interact with the Django database API using Django ORM
+# from here we can interact with the database using Django ORM API
 [print(item.comp_name) for item in Company.objects.all()]
 
 [print(item.lang_name) for item in Language.objects.all()]
